@@ -82,9 +82,3 @@ display(fig)
 # Creates a binary STL file for 3D printing
 export_stl(result, "output_mesh.stl"; threshold=0.3)
 
-Key,Description
-x,Raw design variables (densities) on the GPU grid.
-xPhys,Filtered physical densities (0.0 to 1.0) used for the actual structure.
-compliance,Final objective function value (stiffness measure).
-history,Array containing compliance values for every iteration.
-iterations,Total number of iterations performed.
