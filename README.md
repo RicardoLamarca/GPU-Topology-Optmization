@@ -10,7 +10,7 @@ It solves the standard **minimum compliance** problem (maximizing stiffness) usi
 
 ---
 
-## ⚙️ Implemented Features
+##  Implemented Features
 
 Based on the codebase, this solver includes:
 
@@ -35,7 +35,7 @@ The script is hardcoded for the **Half-MBB Beam** problem:
 
 ---
 
-## 💻 Hardware Requirements
+##  Hardware Requirements
 
 To run this script, you must have:
 1.  **NVIDIA GPU:** The code explicitly requires CUDA support.
@@ -43,7 +43,7 @@ To run this script, you must have:
 
 ---
 
-## 🛠️ Installation
+##  Installation
 
 1.  **Install Julia:** Download from [julialang.org](https://julialang.org/).
 2.  **Install Dependencies:**
@@ -55,7 +55,7 @@ To run this script, you must have:
 
 ---
 
-## 🚀 Usage
+##  Usage
 
 The solver is self-contained in a single file. You can adjust the parameters in the `gpu_topopt_3d` function call at the bottom of the script.
 
