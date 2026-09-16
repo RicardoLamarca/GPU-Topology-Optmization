@@ -1,6 +1,6 @@
 # FULL GPU-ACCELERATED TOPOLOGY OPTIMIZATION (10-20x SPEEDUP)
 # Custom CUDA kernels for maximum performance
-# All heavy computation runs on GPU
+# heavy computation runs on GPU
 
 using CUDA
 using LinearAlgebra
@@ -9,9 +9,9 @@ using Printf
 using Makie, GLMakie
 using GeometryBasics, FileIO
 
-# ============================================================================
-# PART 1: GPU KERNELS FOR 3D FEA
-# ============================================================================
+
+# GPU KERNELS FOR 3D FEA
+
 
 """
 GPU kernel: Compute element stiffness matrices with SIMP penalization
@@ -142,13 +142,11 @@ function gpu_axpy_kernel!(y, a, x, n)
     return nothing
 end
 
-# ============================================================================
-# PART 2: GPU-ACCELERATED SOLVERS
-# ============================================================================
+# GPU-ACCELERATED SOLVERS
 
 """
 GPU Conjugate Gradient solver for K*u = f
-Fully GPU-resident - no CPU transfers during iteration
+Fully GPU-resident
 """
 function gpu_cg_solve!(u, K_val, K_colind, K_rowptr, f, n;
                        maxiter=1000, tol=1e-8, verbose=false)
@@ -222,12 +220,10 @@ function apply_gpu_filter!(x_out, x_in, nx, ny, nz, rmin)
     return x_out
 end
 
-# ============================================================================
-# PART 3: 3D ELEMENT MATRICES
-# ============================================================================
+# 3D ELEMENT MATRICES
 
 """
-Compute 8-node hexahedral element stiffness matrix (CPU, done once)
+Compute 8-node hexahedral element stiffness matrix (CPU, done once), can be adapted for own geometries (fix degrees of freedom to 1 in matrix)
 """
 function hex8_stiffness_matrix(E, ν)
     # Gauss points
@@ -321,13 +317,10 @@ function build_edof_table(nx, ny, nz)
     return edof
 end
 
-# ============================================================================
-# PART 4: FULL GPU OPTIMIZATION LOOP
-# ============================================================================
+# FULL GPU OPTIMIZATION LOOP
 
 """
-Main GPU-accelerated topology optimization
-All heavy computation on GPU, minimal CPU transfers
+Main GPU accelerated topology optimization
 """
 function gpu_topopt_3d(;
     nx=60, ny=20, nz=10,           # Mesh dimensions
@@ -547,9 +540,7 @@ function gpu_topopt_3d(;
     return result
 end
 
-# ============================================================================
-# PART 5: VISUALIZATION AND EXPORT
-# ============================================================================
+# VISUALIZATION AND EXPORT
 
 """
 Visualize topology optimization result
